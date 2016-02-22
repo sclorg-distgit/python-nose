@@ -4,11 +4,11 @@
 %global upstream_name nose
 
 # Enable building without docs to avoid a circular dependency between this and python-sphinx
-%global with_docs 0
+%global with_docs 1
 
 Name:           %{?scl_prefix}python-nose
 Version:        1.3.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Discovery-based unittest extension for Python
 
 Group:          Development/Languages
@@ -115,6 +115,9 @@ rm -rf %{buildroot}
 %endif # with_docs
 
 %changelog
+* Sat Feb 13 2016 Robert Kuska <rkuska@redhat.com> - 1.3.7-2
+- Build with docs
+
 * Sat Feb 13 2016 Robert Kuska <rkuska@redhat.com> - 1.3.7-1
 - Update to 1.3.7
 
