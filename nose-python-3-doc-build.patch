@@ -1,0 +1,11 @@
+--- doc/conf.py.orig	2013-11-11 09:24:27.787572518 +0100
++++ doc/conf.py	2013-11-11 09:25:03.314833611 +0100
+@@ -22,7 +22,7 @@
+ 
+ # need to be brutal because of easy_install's pth hacks:
+ sys.path.insert(0,
+-    os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
++    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'build', 'lib')))
+ sys.path.insert(0, os.path.abspath('.'))
+ 
+ from nose import __versioninfo__ as nose_version
