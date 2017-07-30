@@ -4,11 +4,11 @@
 %global upstream_name nose
 
 # Enable building without docs to avoid a circular dependency between this and python-sphinx
-%global with_docs 0
+%global with_docs 1
 
 Name:           %{?scl_prefix}python-nose
 Version:        1.3.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Discovery-based unittest extension for Python
 
 Group:          Development/Languages
@@ -31,6 +31,9 @@ Patch3:         python-nose-readunicode.patch
 # Python now returns ModuleNotFoundError instead of the previous ImportError
 # https://github.com/nose-devs/nose/pull/1029
 Patch4:         python-nose-py36.patch
+# Fix documentation generation with the python3 version of sphinx
+# https://github.com/nose-devs/nose/issues/481
+Patch5: python-nose-py3-sphinx.patch
 
 BuildRoot:      %{_tmppath}/%{pkg_name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -75,6 +78,7 @@ Documentation for Nose
 %patch2 -p1 -b .unicode
 %patch3 -p1 -b .unicode
 %patch4 -p1 -b .py36
+%patch5 -p1 -b .py3sphinx
 
 dos2unix examples/attrib_plugin.py
 
@@ -131,6 +135,9 @@ rm -rf %{buildroot}
 %endif # with_docs
 
 %changelog
+* Mon Jun 19 2017 Charalampos Stratakis <cstratak@redhat.com> - 1.3.7-3
+- Rebuild with docs for rh-python36
+
 * Fri Jun 16 2017 Iryna Shcherbina <ishcherb@redhat.com> - 1.3.7-3
 - Rebuild for rh-python36
 - Bootstrapping, step 1/2: with_docs 0
